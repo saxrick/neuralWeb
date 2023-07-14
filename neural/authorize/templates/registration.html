@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+    .all-form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #f1f7fe;
+        border-radius: 30px;
+        box-shadow: 0 0 2em hsl(231deg 62% 94%);
+        width: 300px;
+        height: 400px;
+         display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .form-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 300px;
+        height: 100px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .header{
+        height: 150px;
+    }
+    input {
+        border-radius: 15px;
+        width: 250px;
+        height: 40px;
+        outline: none;
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        &::placeholder {
+				  text-align: center;
+				font-size: 0.9em;
+			}
+    }
+  </style>
+  </head>
+  <body style = "background-color: #dde5f4;">
+    <div class="header"></div>
+    <main>
+        <div align="center">
+          <form method="post" action="{% url 'registration' %}">
+            {%csrf_token%}
+
+            <div class="all-form">
+
+            <div class="form-group">
+                <label for="username"> Логин </label>
+                <br>
+                <input type="text" name="username" id="username" placeholder="Введите логин">
+            </div>
+            <div class="form-group">
+                <label for="password"> Пароль </label>
+                <br>
+                <input type="text" name="password" id="password" placeholder="Введите пароль">
+            </div>
+
+               <div class="form-group">
+                  <input style="background-color: #3e4684; color: #ffffff;"  type="submit" value="Зарегистрироваться">
+               </div>
+              {% if invalid%}
+                 <p>Имя занято, попробуйте другое </p>
+              {% endif %}
+            </div>
+            </form>
+                <div class="form-group">
+                  <div align="center">Или можете <a href="/login">войти</a></div>
+               </div>
+        </div>
+    <br>
+  </main>
+  </body>
+</html>

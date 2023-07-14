@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script>
+        function hideInput(inputElement) {
+            inputElement.style.display = "none";
+        }
+    </script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    h1{
+         color: #000000;
+         font-family: 'Montserrat', sans-serif;
+    }
+    body {
+       font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+
+       background-color: #f1f7fe;
+    }
+    .header {
+     background-color: #dde5f4;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .navbar {
+      background-color: #3e4684;
+      display: flex;
+    }
+    a {
+        font-family: 'Montserrat', sans-serif;
+    }
+    .navbar a {
+      flex: 1;
+      padding: 10px;
+      background-color: #3e4684;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      border-right: 1px solid #ccc;
+      font-weight: bold;
+    }
+    .buttons {
+      background-color: #3e4684;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .navbar a:last-child {
+      border-right: none;
+    }
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+       border-radius: 30px;
+
+        background-color: #dde5f4;
+
+       border: none;
+       border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: none;
+      text-align: center;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .green-button {
+      background-color: #3e4684;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group label {
+        align-self: center;
+        width: 100%;
+     }
+    .form-group input[type="text"] {
+        width: 20%;
+        box-sizing: border-box;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+         outline: none;
+        border: none;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #3e4684;
+        box-shadow: 0 0 0 2px rgba(0, 0, 255, 0.5);
+    }
+    .footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+    <nav class="nav">
+        Привет, {{ user.username }} |
+        <a href="{% url 'logout' %}">Выйти</a>
+    </nav>
+  <div class="header">
+    <h1>WEB PROJECT TEAM 4626</h1>
+  </div>
+  <div class="navbar">
+     <a href="/" class="button">Ручной ввод</a>
+    <a href="/calculate" class="button">Калькулятор рекомендаций</a>
+    <a href="/docxForms" class="button">Печатные формы</a>
+  </div>
+  <div class="content">
+       <h2>Печатные формы</h2>
+      <div class="form-group">
+       <a href="{% url 'create_all_word_document_view' %}">
+           <button class = "buttons" >Создать</button>
+       </a>
+          <p></p>
+
+    <script>
+        $(document).ready(function() {
+            $('#refresh-button').click(function() {
+                location.reload(true);
+            });
+        });
+    </script>
+          {% for file in files %}
+               <a href="{{ file }}" download>{{ file }}</a><br>
+          {% endfor %}
+
+
+
+      </div>
+  </div>
+  <div class="footer">
+    &copy; 2023 Мой сайт. Все права защищены.
+  </div>
+</body>
+</html>

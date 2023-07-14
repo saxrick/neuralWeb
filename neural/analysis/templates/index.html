@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    h1{
+         color: #000000;
+         font-family: 'Montserrat', sans-serif;
+    }
+    body {
+       font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+
+       background-color: #f1f7fe;
+    }
+    .header {
+     background-color: #dde5f4;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .navbar {
+      background-color: #3e4684;
+      display: flex;
+    }
+    a {
+        font-family: 'Montserrat', sans-serif;
+    }
+    .navbar a {
+      flex: 1;
+      padding: 10px;
+      background-color: #3e4684;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      border-right: 1px solid #ccc;
+      font-weight: bold;
+    }
+    .navbar a:last-child {
+      border-right: none;
+    }
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+       border-radius: 30px;
+
+        background-color: #dde5f4;
+
+       border: none;
+       border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: none;
+      text-align: center;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .green-button {
+      background-color: #3e4684;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group label {
+        align-self: center;
+        width: 100%;
+     }
+    .form-group input[type="text"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+         outline: none;
+        border: none;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #3e4684;
+        box-shadow: 0 0 0 2px rgba(0, 0, 255, 0.5);
+    }
+    .footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <nav class="nav">
+        Привет, {{ user.username }} |
+        <a href="{% url 'logout' %}">Выйти</a>
+    </nav>
+  <div class="header">
+    <h1>WEB PROJECT TEAM 4626</h1>
+  </div>
+  <div class="navbar">
+    <a href="/" class="button">Ручной ввод</a>
+    <a href="/calculate" class="button">Калькулятор рекомендаций</a>
+    <a href="/docxForms" class="button">Печатные формы</a>
+  </div>
+  <div class="content">
+       <h2>Ручной ввод</h2>
+      <div class="form-group">
+
+        <form method="POST" action="create/">
+            {% csrf_token %}
+        <table>
+          <tr>
+            <th>Персональные данные</th>
+            <th>Резульаты гемоталогического исследования</th>
+            <th>Имунный статус</th>
+            <th>Цитокиновый статус</th>
+          </tr>
+
+          <tr>
+                <td>
+                  <label for="Surname">Фамилия</label>
+                  <input type="text" id="Surname" name="name" value="{{man_in.name}}" />
+                </td>
+                <td>
+                  <label for="name_WBC">Лейкоциты(WBC)</label>
+                  <input type="text" id="name_WBC" name="leu_wbc" value="{{man_in.leu_wbc}}" />
+                </td>
+                <td>
+                  <label for="name_CD3">Общие Т-Лимфоциты</label>
+                  <input type="text" id="name_CD3" name="t_lymf" value="{{man_in.t_lymf}}" />
+                </td>
+                <td>
+                  <label for="name_CD3IFN_CT">CD3+IFN+(стимулированный)</label>
+                  <input type="text" id="name_CD3IFN_CT" name="cd3_ifny_stim" value="{{man_in.cd3_ifny_stim}}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <label for="name_ManWom">Пол(м/ж)</label>
+                  <input type="text" id="name_ManWom" name="manwom" value="{{man_in.manwom}}" />
+                </td>
+                <td>
+                  <label for="name_LYMF">Леймфоциты(LYMF)</label>
+                  <input type="text" id="name_LYMF" name="lymf" value="{{man_in.lymf}}" />
+                </td>
+                <td>
+                  <label for="name_CD19">Общие B-Лимфоциты</label>
+                  <input type="text" id="name_CD19" name="b_lymf" value="{{man_in.b_lymf}}" />
+                </td>
+                <td>
+                  <label for="name_CD3IFN_CO">CD3+IFN+(спонтанный)</label>
+                  <input type="text" id="name_CD3IFN_CO" name="cd3_ifny_spon" value="{{man_in.cd3_ifny_spon}}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <label for="name_dateAnal">Дата анализа</label>
+                  <input type="text" id="name_dateAnal" name="analysis_date" value="{{man_in.analysis_date}}" />
+                </td>
+                <td>
+                  <label for="name_MON">Моноциты(MON)</label>
+                  <input type="text" id="name_MON" name="mon" value="{{man_in.mon}}" />
+                </td>
+                <td>
+                  <label for="name_CD4">T-хелперы</label>
+                  <input type="text" id="name_CD4" name="t_help" value="{{man_in.t_help}}" />
+                </td>
+                <td>
+                  <label for="name_CD3INF_CT">CD3+TNFa+(стимулированный)</label>
+                  <input type="text" id="name_CD3INF_CT" name="cd3_tnfa_stim" value="{{man_in.cd3_tnfa_stim}}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  <label for="name_age">Возраст пациента</label>
+                  <input type="text" id="name_age" name="age" value="{{man_in.age}}" />
+                </td>
+                <td>
+                  <label for="name_NEU">Нейтрофилы(NEU)</label>
+                  <input type="text" id="name_NEU" name="neu" value="{{man_in.neu}}" />
+                </td>
+                <td>
+                  <label for="name_CD8">Т-цитотоксические лимфоциты</label>
+                  <input type="text" id="name_CD8" name="t_cyto_lymf" value="{{man_in.t_cyto_lymf}}" />
+                </td>
+                <td>
+                  <label for="name_CD3INF_CO">CD3+TNFa+(спонтанный)</label>
+                  <input type="text" id="name_CD3INF_CO" name="cd3_tnfa_spon" value="{{man_in.cd3_tnfa_spon}}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  <label for="name_DiagnosBasic">Диагноз оснвной</label>
+                  <input type="text" id="name_DiagnosBasic" name="main_diagnosis" value="{{man_in.main_diagnosis}}" />
+                </td>
+                <td>
+                  <label for="name_EOS">Эозофилы(EOS)</label>
+                  <input type="text" id="name_EOS" name="eos" value="{{man_in.eos}}" />
+                </td>
+                <td>
+                  <label for="name_ratio">Соотношение CD3+CD4+/CD3+CD8+</label>
+                  <input type="text" id="name_ratio" name="cd3_cd4_cd3_cd8" value="{{man_in.cd3_cd4_cd3_cd8}}" />
+                </td>
+                <td>
+                  <label for="name_CD3IL2_CT">CD3+IL2+(стимулированный)</label>
+                  <input type="text" id="name_CD3IL2_CT" name="cd3_il2_stim" value="{{man_in.cd3_il2_stim}}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <label for="name_DiagnosRelated">Дигноз сопустствующий</label>
+                  <input type="text" id="name_DiagnosRelated" name="co_diagnosis" value="{{man_in.co_diagnosis}}" />
+                </td>
+                <td>
+                  <label for="name_BAS">Базофилы(BAS)</label>
+                  <input type="text" id="name_BAS" name="bas" value="{{man_in.bas}}" />
+                </td>
+                <td>
+                  <label for="name_NK_Ob">Общие NK-клетки</label>
+                  <input type="text" id="name_NK_Ob" name="common_nk_cells" value="{{man_in.common_nk_cells}}" />
+                </td>
+                <td>
+                  <label for="name_CD3IL2_CO">CD3+IL2+(спонтанный)</label>
+                  <input type="text" id="name_CD3IL2_CO" name="cd3_il2_spon" value="{{man_in.cd3_il2_spon}}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <label for="name_gens1">1.Гены</label>
+                  <input type="text" id="name_gens1" name="genes1" value="{{man_in.genes1}}" />
+                </td>
+                <td>
+                  <label for="name_HGB">Гемоглобин(HGB)</label>
+                  <input type="text" id="name_HGB" name="hgb" value="{{man_in.hgb}}" />
+                </td>
+                <td>
+                  <label for="name_NK_Cit">NK-клетки цитолитические</label>
+                  <input type="text" id="name_NK_Cit" name="nk_cells_cyto" value="{{man_in.nk_cells_cyto}}" />
+                </td>
+                <td>
+                  <label for="name_FNO">ФНО</label>
+                  <input type="text" id="name_FNO" name="fno" value="{{man_in.fno}}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <label for="name_2gens">2.Гены</label>
+                  <input type="text" id="name_2gens" name="genes2" value="{{man_in.genes2}}" />
+                </td>
+                <td>
+                  <label for="name_PLT">Тромбоциты(PLT)</label>
+                  <input type="text" id="name_PLT" name="trom_plt" value="{{man_in.trom_plt}}" />
+                </td>
+                <td>
+                  <label for="name_CIK">Цируклирующие имунные комплексы</label>
+                  <input type="text" id="name_CIK" name="circ_immu_comps" value="{{man_in.circ_immu_comps}}" />
+                </td>
+                <td>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <label for="name_3gens">3.Гены</label>
+                  <input type="text" id="name_3gens" name="genes3" value="{{man_in.genes3}}" />
+                </td>
+                <td>
+
+                </td>
+                <td>
+                  <label for="name_HCI_CO">HCI-тест(спонтанный)</label>
+                  <input type="text" id="name_HCI_CO" name="hct_test_spon" value="{{man_in.hct_test_spon}}" />
+                </td>
+                <td>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <label for="name_Season">Сезон</label>
+                  <input type="text" id="name_Season" name="season" value="{{man_in.season}}" />
+                </td>
+                <td>
+
+                </td>
+                <td>
+                  <label for="name_HCI_CT">HCI-тест(стимулированный)</label>
+                  <input type="text" id="name_HCI_CT" name="hct_test_stim" value="{{man_in.hct_test_stim}}" />
+                </td>
+                <td>
+
+                </td>
+
+            </tr>
+        </table>
+
+            <input type="submit" class="green-button" value="Сохранить" >
+        </form>
+      </div>
+  </div>
+  <div class="footer">
+    &copy; 2023 Мой сайт. Все права защищены.
+  </div>
+</body>
+</html>

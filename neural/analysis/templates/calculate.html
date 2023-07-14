@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script>
+        function hideInput(inputElement) {
+            inputElement.style.display = "none";
+        }
+    </script>
+  <style>
+    h1{
+         color: #000000;
+         font-family: 'Montserrat', sans-serif;
+    }
+    body {
+       font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+
+       background-color: #f1f7fe;
+    }
+    .header {
+     background-color: #dde5f4;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .navbar {
+      background-color: #3e4684;
+      display: flex;
+    }
+    a {
+        font-family: 'Montserrat', sans-serif;
+    }
+    .navbar a {
+      flex: 1;
+      padding: 10px;
+      background-color: #3e4684;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      border-right: 1px solid #ccc;
+      font-weight: bold;
+    }
+    .navbar a:last-child {
+      border-right: none;
+    }
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+       border-radius: 30px;
+
+        background-color: #dde5f4;
+
+       border: none;
+       border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: none;
+      text-align: center;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .green-button {
+      background-color: #3e4684;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group label {
+        align-self: center;
+        width: 100%;
+     }
+    .form-group input[type="text"] {
+        width: 20%;
+        box-sizing: border-box;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+         outline: none;
+        border: none;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #3e4684;
+        box-shadow: 0 0 0 2px rgba(0, 0, 255, 0.5);
+    }
+    .footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <nav class="nav">
+        Привет, {{ user.username }} |
+        <a href="{% url 'logout' %}">Выйти</a>
+    </nav>
+  <div class="header">
+    <h1>WEB PROJECT TEAM 4626</h1>
+  </div>
+  <div class="navbar">
+     <a href="/" class="button">Ручной ввод</a>
+    <a href="/calculate" class="button">Калькулятор рекомендаций</a>
+    <a href="/docxForms" class="button">Печатные формы</a>
+  </div>
+  <div class="content">
+       <h2>Калькулятор рекомендаций</h2>
+      <div class="form-group">
+
+        <form method="POST" action="createRec/">
+            {% csrf_token %}
+        <table>
+          <tr>
+               <td>
+                  <label for="name_WBC">Лейкоциты(WBC)</label>
+                   <br>
+                  <input type="text" id="name_WBC" name="leu_wbc" value="{{rec.leu_wbc}}" />
+                  <input type="text" id="name_WBC_min" name="leu_wbc_min" value="{{rec.leu_wbc_min}}" placeholder="От" />
+                  <input type="text" id="name_WBC_max" name="leu_wbc_max" value="{{rec.leu_wbc_min}}" placeholder="До" />
+               </td>
+                <td>
+                  <label for="name_CD3">Общие Т-Лимфоциты</label>
+                    <br>
+                  <input type="text" id="name_CD3" name="t_lymf" value="{{rec.t_lymf}}" />
+                  <input type="text" id="name_CD3_min" name="t_lymf_min" value="{{rec.t_lymf_min}}" placeholder="От" />
+                  <input type="text" id="name_CD3_max" name="t_lymf_max" value="{{rec.t_lymf_min}}" placeholder="До" />
+
+                </td>
+                <td>
+                  <label for="name_CD3IFN_CT">CD3+IFN+(стимулированный)</label>
+                    <br>
+                  <input type="text" id="name_CD3IFN_CT" name="cd3_ifny_stim" value="{{rec.cd3_ifny_stim}}" />
+                  <input type="text" id="name_CD3IFN_CT_min" name="cd3_ifny_stim_min" value="{{rec.cd3_ifny_stim_min}}" placeholder="От" />
+                  <input type="text" id="name_CD3IFN_CT_max" name="cd3_ifny_stim_max" value="{{rec.cd3_ifny_stim_min}}" placeholder="До" />
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <label for="name_LYMF">Леймфоциты(LYMF)</label>
+                    <br>
+                  <input type="text" id="name_LYMF" name="lymf" value="{{rec.lymf}}" />
+                  <input type="text" id="name_LYMF_min" name="lymf_min" value="{{rec.lymf_min}}" placeholder="От" />
+                  <input type="text" id="name_LYMF_max" name="lymf_max" value="{{rec.lymf_min}}" placeholder="До" />
+
+                </td>
+                <td>
+                  <label for="name_CD19">Общие B-Лимфоциты</label>
+                    <br>
+                  <input type="text" id="name_CD19" name="b_lymf" value="{{rec.common_b_lymf}}" />
+                  <input type="text" id="name_CD19_min" name="b_lymf_min" value="{{rec.common_b_lymf_min}}" placeholder="От" />
+                  <input type="text" id="name_CD19_max" name="b_lymf_max" value="{{rec.common_b_lymf_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_CD3IFN_CO">CD3+IFN+(спонтанный)</label>
+                    <br>
+                  <input type="text" id="name_CD3IFN_CO" name="cd3_ifny_spon" value="{{rec.cd3_ifny_spon}}" />
+                  <input type="text" id="name_CD3IFN_CO_min" name="cd3_ifny_spon_min" value="{{rec.cd3_ifny_spon_min}}" placeholder="От" />
+                  <input type="text" id="name_CD3IFN_CO_max" name="cd3_ifny_spon_max" value="{{rec.cd3_ifny_spon_min}}" placeholder="До" />
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>
+                  <label for="name_MON">Моноциты(MON)</label>
+                    <br>
+                  <input type="text" id="name_MON" name="mon" value="{{rec.mon}}" />
+                  <input type="text" id="name_MON_min" name="mon_min" value="{{rec.mon_min}}" placeholder="От" />
+                  <input type="text" id="name_MON_max" name="mon_max" value="{{rec.mon_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_CD4">T-хелперы</label>
+                    <br>
+                  <input type="text" id="name_CD4" name="t_help" value="{{rec.t_help}}" />
+                  <input type="text" id="name_CD4_min" name="t_help_min" value="{{rec.t_help_min}}" placeholder="От" />
+                  <input type="text" id="name_CD4_max" name="t_help_max" value="{{rec.t_help_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_CD3INF_CT">CD3+TNFa+(стимулированный)</label>
+                    <br>
+                  <input type="text" id="name_CD3INF_CT" name="cd3_tnfa_stim" value="{{rec.cd3_tnfa_stim}}" />
+                  <input type="text" id="name_CD3INF_CT_min" name="cd3_tnfa_stim_min" value="{{rec.cd3_tnfa_stim_min}}" placeholder="От" />
+                  <input type="text" id="name_CD3INF_CT_max" name="cd3_tnfa_stim_max" value="{{rec.cd3_tnfa_stim_min}}" placeholder="До" />
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                  <label for="name_NEU">Нейтрофилы(NEU)</label>
+                    <br>
+                  <input type="text" id="name_NEU" name="neu" value="{{rec.neu}}" />
+                  <input type="text" id="name_NEU_min" name="neu_min" value="{{rec.neu_min}}" placeholder="От" />
+                  <input type="text" id="name_NEU_max" name="neu_max" value="{{rec.neu_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_CD8">Т-цитотоксические лимфоциты</label>
+                    <br>
+                  <input type="text" id="name_CD8" name="t_cyto_lymf" value="{{rec.t_cyto_lymf}}" />
+                  <input type="text" id="name_CD8_min" name="t_cyto_lymf_min" value="{{rec.t_cyto_lymf_min}}" placeholder="От" />
+                  <input type="text" id="name_CD8_max" name="t_cyto_lymf_max" value="{{rec.t_cyto_lymf_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_CD3INF_CO">CD3+TNFa+(спонтанный)</label>
+                    <br>
+                  <input type="text" id="name_CD3INF_CO" name="cd3_tnfa_spon" value="{{rec.cd3_tnfa_spon}}" />
+                  <input type="text" id="name_CD3INF_CO_min" name="cd3_tnfa_spon_min" value="{{rec.cd3_tnfa_spon_min}}" placeholder="От" />
+                  <input type="text" id="name_CD3INF_CO_max" name="cd3_tnfa_spon_max" value="{{rec.cd3_tnfa_spon_min}}" placeholder="До" />
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                  <label for="name_EOS">Эозофилы(EOS)</label>
+                    <br>
+                  <input type="text" id="name_EOS" name="eos" value="{{rec.eos}}" />
+                  <input type="text" id="name_EOS_min" name="eos_min" value="{{rec.eos_min}}" placeholder="От" />
+                  <input type="text" id="name_EOS_max" name="eos_max" value="{{rec.eos_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_ratio">Соотношение CD3+CD4+/CD3+CD8+</label>
+                    <br>
+                  <input type="text" id="name_ratio" name="cd3_cd4_cd3_cd8" value="{{rec.cd3_cd4_cd3_cd8}}" />
+                  <input type="text" id="name_ratio_min" name="cd3_cd4_cd3_cd8_min" value="{{rec.cd3_cd4_cd3_cd8_min}}" placeholder="От" />
+                  <input type="text" id="name_ratio_max" name="cd3_cd4_cd3_cd8_max" value="{{rec.cd3_cd4_cd3_cd8_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_CD3IL2_CT">CD3+IL2+(стимулированный)</label>
+                    <br>
+                  <input type="text" id="name_CD3IL2_CT" name="cd3_il2_stim" value="{{rec.cd3_il2_stim}}" />
+                  <input type="text" id="name_CD3IL2_CT_min" name="cd3_il2_stim_min" value="{{rec.cd3_il2_stim_min}}" placeholder="От" />
+                  <input type="text" id="name_CD3IL2_CT_max" name="cd3_il2_stim_max" value="{{rec.cd3_il2_stim_min}}" placeholder="До" />
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>
+                  <label for="name_BAS">Базофилы(BAS)</label>
+                    <br>
+                  <input type="text" id="name_BAS" name="bas" value="{{rec.bas}}" />
+                  <input type="text" id="name_BAS_min" name="bas_min" value="{{rec.bas_min}}" placeholder="От" />
+                  <input type="text" id="name_BAS_max" name="bas_max" value="{{rec.bas_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_NK_Ob">Общие NK-клетки</label>
+                    <br>
+                  <input type="text" id="name_NK_Ob" name="common_nk_cells" value="{{rec.common_nk_cells}}" />
+                  <input type="text" id="name_NK_Ob_min" name="common_nk_cells_min" value="{{rec.common_nk_cells_min}}" placeholder="От" />
+                  <input type="text" id="name_NK_Ob_max" name="common_nk_cells_max" value="{{rec.common_nk_cells_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_CD3IL2_CO">CD3+IL2+(спонтанный)</label>
+                    <br>
+                  <input type="text" id="name_CD3IL2_CO" name="cd3_il2_spon" value="{{rec.cd3_il2_spon}}" />
+                  <input type="text" id="name_CD3IL2_CO_min" name="cd3_il2_spon_min" value="{{rec.cd3_il2_spon_min}}" placeholder="От" />
+                  <input type="text" id="name_CD3IL2_CO_max" name="cd3_il2_spon_max" value="{{rec.cd3_il2_spon_min}}" placeholder="До" />
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>
+                  <label for="name_HGB">Гемоглобин(HGB)</label>
+                    <br>
+                  <input type="text" id="name_HGB" name="hgb" value="{{rec.hgb}}" />
+                  <input type="text" id="name_HGB_min" name="hgb_min" value="{{rec.hgb_min}}" placeholder="От" />
+                  <input type="text" id="name_HGB_max" name="hgb_max" value="{{rec.hgb_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_NK_Cit">NK-клетки цитолитические</label>
+                    <br>
+                  <input type="text" id="name_NK_Cit" name="nk_cells_cyto" value="{{rec.nk_cells_cyto}}" />
+                  <input type="text" id="name_NK_Cit_min" name="nk_cells_cyto_min" value="{{rec.nk_cells_cyto_min}}" placeholder="От" />
+                  <input type="text" id="name_NK_Cit_max" name="nk_cells_cyto_max" value="{{rec.nk_cells_cyto_min}}" placeholder="До" />
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                  <label for="name_PLT">Тромбоциты(PLT)</label>
+                    <br>
+                  <input type="text" id="name_PLT" name="trom_plt" value="{{rec.trom_plt}}" />
+                  <input type="text" id="name_PLT_min" name="trom_plt_min" value="{{rec.trom_plt_min}}" placeholder="От" />
+                  <input type="text" id="name_PLT_max" name="trom_plt_max" value="{{rec.trom_plt_min}}" placeholder="До" />
+                </td>
+                <td>
+                  <label for="name_CIK">Цируклирующие имунные комплексы</label>
+                    <br>
+                  <input type="text" id="name_CIK" name="circ_immu_comps" value="{{rec.circ_immu_comps}}" />
+                  <input type="text" id="name_CIK_min" name="circ_immu_comps_min" value="{{rec.circ_immu_comps_min}}" placeholder="От" />
+                  <input type="text" id="name_CIK_max" name="circ_immu_comps_max" value="{{rec.circ_immu_comps_min}}" placeholder="До" />
+                </td>
+                <td>
+
+                </td>
+            </tr>
+
+            <tr>
+                 <td>
+                  <label for="name_age">Возраст пациента</label>
+                     <br>
+                  <input type="text" id="name_age" name="age" value="{{rec.age}}" />
+                </td>
+                <td>
+                  <label for="name_HCI_CO">HCI-тест(спонтанный)</label>
+                    <br>
+                  <input type="text" id="name_HCI_CO" name="hct_test_spon" value="{{rec.hct_test_spon}}" />
+                  <input type="text" id="name_HCI_CO_min" name="hct_test_spon_min" value="{{rec.hct_test_spon_min}}" placeholder="От" />
+                  <input type="text" id="name_HCI_CO_max" name="hct_test_spon_max" value="{{rec.hct_test_spon_min}}" placeholder="До" />
+                </td>
+                <td>
+                </td>
+            </tr>
+                 <tr>
+    <td>
+      <label for="name_Season">Сезон</label>
+        <br>
+      <input type="text" id="name_Season" name="season" value="{{rec.season}}" />
+    </td>
+    <td>
+      <label for="name_HCI_CT">HCI-тест(стимулированный)</label>
+        <br>
+      <input type="text" id="name_HCI_CT" name="hct_test_stim" value="{{rec.hct_test_stim}}" />
+      <input type="text" id="name_HCI_CT_min" name="hct_test_stim_min" value="{{rec.hct_test_stim_min}}" placeholder="От" />
+      <input type="text" id="name_HCI_CT_max" name="hct_test_stim_max" value="{{rec.hct_test_stim_min}}" placeholder="До" />
+    </td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td colspan="2"></td>
+  </tr>
+
+  <tr>
+    <td colspan="3">
+        <label for="name_HCI_CT">Рекомендации</label>
+        <br>
+      <input style="height: 100px; width: 100%;" type="text" id="recomendations" name="recomendations" value="{{rec.recomendations}}" />
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="3">
+      <input type="submit" class="green-button" value="Сохранить" >
+    </td>
+  </tr>
+
+        </table>
+
+
+        </form>
+      </div>
+  </div>
+  <div class="footer">
+    &copy; 2023 Мой сайт. Все права защищены.
+  </div>
+</body>
+</html>
